@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+
+<!--
+   ============================================================
+   ЧТО НУЖНО ДОЗАПОЛНИТЬ САМОМУ — всё помечено звёздочкой  *
+   ============================================================
+   * 1. ДОМЕН — замените «вашдомен.ru» на свой (canonical, og:image,
+        og:url, dns-prefetch, а также в JSON-LD, sitemap.xml, schema.jsonld)
+   * 2. og:image — сделайте картинку-превью 1200x630 px и укажите её путь
+   * 3. ФАВИКОНКИ — при желании добавьте свои favicon.ico / apple-touch-icon.png
+   * 4. ТЕЛЕФОН и СОЦСЕТИ — проверьте актуальность номера и ссылок
+   * 5. JSON-LD (для поисковиков) — подтвердите address, geo, telephone, image
+   * 6. ГРАФИК работы — сейчас «По предварительной записи» (блок «Как нас найти»)
+   * 7. ФОТОГРАФИИ — по возможности сожмите: папка images весит около 27 МБ
+   ============================================================
+-->
+
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSP -->
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    base-uri 'none'; 
+    form-action 'self';
+    connect-src 'self';
+    frame-src 'self';
+    manifest-src 'self';
+    script-src 'self' 'nonce-abc123';
+    style-src 'self' fonts.googleapis.com;
+    font-src 'self' fonts.gstatic.com;
+    img-src 'self' data:;
+    object-src 'none';">
+    <!-- SEO -->
+    <meta name="theme-color" content="#411B42">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Beauty Studio - Эстетическая косметология в Гомеле</title>
+    <meta name="description"
+        content="Салонная косметология в Гомеле. Чистка лица, пилинг, массаж лица, омоложение, работаем с проблемной кожей, акне. Запись по телефону в удобное время.">
+    <link rel="canonical" href="https://вашдомен.ru/"> <!-- * замените вашдомен.ru на свой домен -->
+
+    <!-- Structured Data: JSON-LD подключён inline-скриптом в конце страницы -->
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#411B42">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Beauty Studio — Косметология">
+    <meta property="og:description"
+        content="Профессиональная косметология: чистка, пилинг, массаж, омоложение. Запись онлайн и по телефону.">
+    <!-- * og:image — сделайте превью 1200x630 px и укажите путь к нему -->
+    <meta property="og:image" content="https://вашдомен.ru/images/IMG_logo.jpeg">
+    <meta property="og:url" content="https://вашдомен.ru/"> <!-- * замените домен -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Ресурсы -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//вашдомен.ru"> <!-- * замените домен -->
+
+    <!-- Шрифты -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Karla:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Локальные стили и скрипты -->
+    <link rel="stylesheet" href="style.css">
+    <script nonce="abc123" defer src="script.js"></script>
+
+    <script type="application/ld+json" nonce="abc123">
+    {
+        "@context": "https://schema.org",
+        "@type": "BeautySalon",
+        "@id": "https://вашдомен.ru/#salon",
+        "name": "Beauty Studio",
+        "url": "https://вашдомен.ru/",
+        "image": "https://вашдомен.ru/images/IMG_logo.jpeg",
+        "telephone": "+375291770822",
+        "priceRange": "$$",
+        "description": "Студия эстетической косметологии в Гомеле",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "ул. Привокзальная, д. 1, каб. 716",
+            "addressLocality": "Гомель",
+            "postalCode": "246000",
+            "addressCountry": "BY"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 52.431244,
+            "longitude": 30.992874
+        },
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+            "opens": "10:00",
+            "closes": "21:00"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <header class="header">
+
+        <a href="#top" class="logo" aria-label="Beauty Studio — на главную">
+            <span class="logo__tag">Beauty Studio</span>
+        </a>
+
+        <!-- Навигация: на десктопе по центру; на мобильном выезжает слева направо -->
+        <nav class="nav" id="nav" aria-label="Главное меню">
+            <a href="#services">Услуги</a>
+            <a href="#prices">Цены</a>
+            <a href="#works">Работы</a>
+            <a href="#certs">Сертификаты</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+
+        <!-- Затемнение фона при открытом мобильном меню -->
+        <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+        <!-- Кликабельная CTA-кнопка: справа на десктопе, по центру на мобильном -->
+        <button class="cta-btn" type="button" aria-label="Связаться с нами">
+            📞 Связаться
+        </button>
+
+        <!-- Бургер: виден только на мобильных, всегда справа -->
+        <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false"
+            aria-controls="nav">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <main id="top">
+        <!-- ============ БЛОК 1: УСЛУГИ (карусель прайс-листов) ============ -->
+        <section class="section" id="services" aria-labelledby="services-title">
+            <div class="container">
+                <div class="section__head">
+                    <h1 id="services-title" class="section__title">Процедуры, которые мы выполняем</h1>
+                </div>
+
+                <!-- Карусель: на больших — стрелки, на малых — нативный скролл -->
+                <div class="carousel">
+                    <button class="carousel__btn carousel__btn--left" type="button" data-target="#services-track"
+                        aria-label="Прокрутить влево">‹</button>
+
+                    <div class="carousel__track" id="services-track">
+                        <article class="card" aria-label="прайс, фото 1">
+                            <img src="images/IMG9.jpeg" alt="Прайс: консультация косметолога" fetchpriority="high"
+                                decoding="sync">
+                        </article>
+                        <article class="card" aria-label="прайс, фото 2">
+                            <img src="images/IMG10.jpeg" alt="Прайс: чистка лица" decoding="async">
+                        </article>
+                        <article class="card" aria-label="прайс, фото 3">
+                            <img src="images/IMG11.jpeg" alt="Прайс: массаж лица" decoding="async">
+                        </article>
+                        <article class="card" aria-label="прайс, фото 4">
+                            <img src="images/IMG12.jpeg" alt="Прайс: пилинги и уходовые процедуры" decoding="async">
+                        </article>
+                        <article class="card" aria-label="прайс, фото 5">
+                            <img src="images/IMG13.jpeg" alt="Прайс: полная очистка кожи" decoding="async">
+                        </article>
+                    </div>
+
+                    <button class="carousel__btn carousel__btn--right" type="button" data-target="#services-track"
+                        aria-label="Прокрутить вправо">›</button>
+                </div>
+
+                <div class="center mt-32">
+                    <button class="btn btn--primary" type="button">📞 Связаться</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ БЛОК 2: ПРАЙС-БАННЕР ============ -->
+        <section class="section section--banner" id="prices" aria-labelledby="prices-title">
+            <div class="container">
+                <div class="prices-banner">
+                    <h2 id="prices-title" class="brow-light">Полный прайс-лист без сюрпризов при оплате</h2>
+                    <div class="prices-banner__actions">
+                        <a href="prices.html" class="btn btn--light">Узнать цены →</a>
+                        <button class="btn btn--ghost-light" type="button">📞
+                            Связаться</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="discipline-quote">
+            <blockquote class="discipline-quote__body">
+                <p><strong>Здоровье кожи</strong> начинается с дисциплины,</p>
+                <p>а не с волшебной баночки.</p>
+                <p>Станьте регулярным клиентом, а не случайным гостем!</p>
+            </blockquote>
+        </div>
+
+        <!-- ============ БЛОК 3: РАБОТЫ (портфолио) ============ -->
+        <section class="section" id="works" aria-labelledby="works-title">
+            <div class="container">
+                <div class="section__head">
+                    <h3 id="works-title" class="section__title">Наши работы</h3>
+                </div>
+
+                <div class="carousel">
+                    <button class="carousel__btn carousel__btn--left" type="button" data-target="#works-track"
+                        aria-label="Прокрутить влево">‹</button>
+
+                    <div class="carousel__track" id="works-track">
+
+                        <article class="card card--portrait" aria-label="Результат процедуры омоложения, фото 1">
+                            <img src="images/IMG_1.jpeg" alt="Результат процедуры омоложения лица" loading="lazy"
+                                decoding="async">
+                        </article>
+
+                        <article class="card card--portrait" aria-label="Результат процедуры омоложения, фото 2">
+                            <img src="images/IMG_2.jpeg" alt="Результат процедуры омоложения" loading="lazy"
+                                decoding="async">
+                        </article>
+
+                        <article class="card card--portrait" aria-label="Результат процедуры омоложения, фото 3">
+                            <img src="images/IMG_3.jpeg" alt="Результат процедуры омоложения до и после" loading="lazy"
+                                decoding="async">
+                        </article>
+
+                        <article class="card card--portrait" aria-label="Результат процедуры омоложения, фото 4">
+                            <img src="images/IMG_4.jpeg" alt="Результат процедуры омоложения" loading="lazy"
+                                decoding="async">
+                        </article>
+
+                        <article class="card card--portrait" aria-label="Результат процедуры омоложения, фото 5">
+                            <img src="images/IMG_5.jpeg" alt="Результат процедуры омоложения" loading="lazy"
+                                decoding="async">
+                        </article>
+
+                        <article class="card card--portrait" aria-label="Результат процедуры омоложения, фото 6">
+                            <img src="images/IMG_6.jpeg" alt="Результат процедуры омоложения" loading="lazy"
+                                decoding="async">
+                        </article>
+
+                        <article class="card card--portrait" aria-label="Результат процедуры омоложения, фото 7">
+                            <img src="images/IMG_7.jpeg" alt="Результат процедуры омоложения" loading="lazy"
+                                decoding="async">
+                        </article>
+
+                        <article class="card card--portrait" aria-label="Результат процедуры омоложения, фото 8">
+                            <img src="images/IMG_8.jpeg" alt="Результат процедуры омоложения" loading="lazy"
+                                decoding="async">
+                        </article>
+
+                        <article class="card card--portrait" aria-label="Результат процедуры омоложения, фото 9">
+                            <img src="images/IMG_9.jpeg" alt="Результат процедуры омоложения" loading="lazy"
+                                decoding="async">
+                        </article>
+
+                        <article class="card card--portrait" aria-label="Результат процедуры омоложения, фото 10">
+                            <img src="images/IMG_10.JPG" alt="Результат процедуры омоложения" loading="lazy"
+                                decoding="async">
+                        </article>
+
+                        <article class="card card--portrait" aria-label="Результат процедуры омоложения, фото 11">
+                            <img src="images/IMG_11.JPG" alt="Результат процедуры омоложения" loading="lazy"
+                                decoding="async">
+                        </article>
+
+                        <article class="card card--portrait" aria-label="Результат процедуры омоложения, фото 12">
+                            <img src="images/IMG_13.jpeg" alt="Результат процедуры омоложения" loading="lazy"
+                                decoding="async">
+                        </article>
+
+                        <article class="card card--portrait" aria-label="Результат процедуры омоложения, фото 14">
+                            <img src="images/IMG_14.jpeg" alt="Результат процедуры омоложения" loading="lazy"
+                                decoding="async">
+                        </article>
+
+                    </div>
+
+                    <button class="carousel__btn carousel__btn--right" type="button" data-target="#works-track"
+                        aria-label="Прокрутить вправо">›</button>
+                </div>
+
+                <div class="center mt-32">
+                    <button class="btn btn--primary" type="button">📞 Связаться</button>
+                </div>
+            </div>
+        </section>
+
+        <article class="profile-card">
+            <div class="profile-photo">
+                <img src="images/IMG22.jpeg" alt="Косметолог Анастасия Куколева">
+            </div>
+            <div class="profile-info">
+                <h4>Куколева Анастасия Геннадьевна</h4>
+                <p class="subtitle">Косметолог-эстетист 5-й разряд</p>
+                <p class="subtitle">Специалист по косметической химии</p>
+            </div>
+        </article>
+
+        <!-- ============ БЛОК 4: СЕРТИФИКАТЫ ============ -->
+        <section class="section" id="certs" aria-labelledby="certs-title">
+            <div class="container">
+                <div class="section__head">
+                    <h4 id="certs-title" class="section__title">Дипломы и сертификаты</h4>
+                </div>
+
+                <div class="carousel">
+                    <button class="carousel__btn carousel__btn--left" type="button" data-target="#certs-track"
+                        aria-label="Прокрутить влево">‹</button>
+
+                    <div class="carousel__track" id="certs-track">
+                        <article class="card card--portrait" aria-label="сертификат 1">
+                            <img src="images/img1.jpeg" alt="Сертификат косметолога" loading="lazy">
+                        </article>
+                        <article class="card card--portrait" aria-label="диплом 1">
+                            <img src="images/img2.jpeg" alt="Диплом по аппаратной косметологии" loading="lazy"
+                                decoding="async">
+                        </article>
+                        <article class="card card--portrait" aria-label="сертификат 2">
+                            <img src="images/img3.jpeg" alt="Сертификат повышения квалификации" loading="lazy"
+                                decoding="async">
+                        </article>
+                        <article class="card card--portrait" aria-label="сертификат 3">
+                            <img src="images/img4.jpeg" alt="Сертификат повышения квалификации" loading="lazy"
+                                decoding="async">
+                        </article>
+                        <article class="card card--portrait" aria-label="сертификат 4">
+                            <img src="images/img5.jpeg" alt="Сертификат повышения квалификации" loading="lazy"
+                                decoding="async">
+                        </article>
+                        <article class="card card--portrait" aria-label="сертификат 5">
+                            <img src="images/img6.jpeg" alt="Сертификат повышения квалификации" loading="lazy"
+                                decoding="async">
+                        </article>
+                        <article class="card card--portrait" aria-label="сертификат 6">
+                            <img src="images/img7.jpeg" alt="Сертификат повышения квалификации" loading="lazy"
+                                decoding="async">
+                        </article>
+                        <article class="card card--portrait" aria-label="сертификат 7">
+                            <img src="images/img8.jpeg" alt="Сертификат повышения квалификации" loading="lazy"
+                                decoding="async">
+                        </article>
+                    </div>
+
+                    <button class="carousel__btn carousel__btn--right" type="button" data-target="#certs-track"
+                        aria-label="Прокрутить вправо">›</button>
+                </div>
+
+                <div class="center mt-32">
+                    <button class="btn btn--primary" type="button">📞 Связаться</button>
+                </div>
+            </div>
+        </section>
+        <!-- ============ БЛОК 5: КОНТАКТЫ / АДРЕС ============ -->
+        <section class="section section--contacts" id="contacts" aria-labelledby="contacts-title">
+            <div class="container">
+                <div class="section__head">
+                    <h4 id="contacts-title" class="section__title">Как нас найти</h4>
+                </div>
+
+                <div class="contacts-grid">
+                    <div class="contacts-card">
+                        <span class="contacts-card__icon" aria-hidden="true">📍</span>
+                        <h5 class="contacts-card__label">Адрес студии</h5>
+                        <!-- TODO: точный адрес (улица, дом, кабинет) -->
+                        <address class="contacts-card__address">
+                            г. Гомель,<br>
+                            ул.Привокзальная, д.1,<br>
+                            каб. 716
+                        </address>
+                    </div>
+
+                    <div class="contacts-card">
+                        <span class="contacts-card__icon" aria-hidden="true">🕘</span>
+                        <h5 class="contacts-card__label">Работаем</h5>
+                        <p class="contacts-card__text">По предварительной записи</p>
+                    </div>
+
+                    <div class="contacts-card">
+                        <span class="contacts-card__icon" aria-hidden="true">📞</span>
+                        <h5 class="contacts-card__label">Связаться</h5>
+                        <p class="contacts-card__text">
+                            <a href="tel:+375291770822">+375 (29) 177-08-22</a>
+                        </p>
+                        <p class="contacts-card__text">
+                            <a href="https://wa.me/375291770822" target="_blank" rel="noopener">WhatsApp</a> ·
+                            <a href="https://t.me/kukoleva_cosmetology/" target="_blank" rel="noopener">Telegram</a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================================
+         ЛАЙТБОКС: увеличение фото с зумом (+/−, колёсико, перетаскивание)
+         ============================================================ -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр изображения"
+        aria-hidden="true">
+        <button class="lightbox__close" type="button" aria-label="Закрыть просмотр">✕</button>
+        <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Предыдущее фото">‹</button>
+
+        <figure class="lightbox__stage">
+            <img class="lightbox__img" id="lightboxImg" src="" alt="">
+        </figure>
+
+        <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Следующее фото">›</button>
+
+        <div class="lightbox__toolbar" role="group" aria-label="Масштаб изображения">
+            <button class="lightbox__btn" type="button" data-zoom="out" aria-label="Уменьшить">−</button>
+            <span class="lightbox__scale" id="lightboxScale">100%</span>
+            <button class="lightbox__btn" type="button" data-zoom="in" aria-label="Увеличить">+</button>
+            <button class="lightbox__btn lightbox__btn--reset" type="button" data-zoom="reset"
+                aria-label="Сбросить масштаб">1:1</button>
+        </div>
+
+        <p class="lightbox__hint">Колёсико мыши или +/− — масштаб · перетаскивание — перемещение · Esc — закрыть</p>
+    </div>
+
+    <!-- ============================================================
+         МОДАЛЬНОЕ ОКНО «СВЯЗАТЬСЯ»
+         На мобильных показываем: телефон, WhatsApp, Telegram (.only-mobile)
+         На десктопе показываем: Instagram, VK (.only-desktop)
+         ============================================================ -->
+    <div class="modal" id="callModal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+        <div class="modal__content" role="document">
+            <span id="modal-title" class="modal__title">Связаться с нами</span>
+
+            <!-- Только для мобильных: позвонить / написать -->
+            <a class="modal__link only-mobile" href="tel:+375291770822">📞 Позвонить</a>
+            <a class="modal__link only-mobile" href="https://wa.me/375291770822" target="_blank" rel="noopener">💬
+                WhatsApp</a>
+            <a class="modal__link only-mobile" href="https://t.me/kukoleva_cosmetology/" target="_blank"
+                rel="noopener">✈️ Telegram</a>
+
+            <!-- Только для десктопа: соцсети -->
+            <a class="modal__link only-desktop" href="https://instagram.com/kukoleva_cosmetology/" target="_blank"
+                rel="noopener">📸
+                Instagram</a>
+            <a class="modal__link only-desktop" href="https://www.tiktok.com/@kukoleva_cosmetology?_r=1" target="_blank"
+                rel="noopener">🌐 tiktok</a>
+
+            <button class="modal__close" type="button">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="container footer__inner">
+            <p class="footer__title">Beauty Studio</p>
+            <p class="footer__address">г. Гомель, ул. Привокзальная, д. 1, каб. 716</p>
+            <nav class="socials" aria-label="Социальные сети">
+                <a href="https://t.me/kukoleva_cosmetology/" class="socials__link" target="_blank" rel="noopener"
+                    aria-label="Telegram">Telegram</a>
+                <a href="https://wa.me/375291770822" class="socials__link" target="_blank" rel="noopener"
+                    aria-label="WhatsApp">WhatsApp</a>
+                <a href="https://instagram.com/kukoleva_cosmetology/" class="socials__link" target="_blank"
+                    rel="noopener" aria-label="Instagram">Instagram</a>
+                <a href="https://www.tiktok.com/@kukoleva_cosmetology?" class="socials__link" target="_blank"
+                    rel="noopener" aria-label="tiktok">tiktok</a>
+            </nav>
+            <p class="footer__copy">© 2026 Beauty Studio. Все права защищены.</p>
+        </div>
+    </footer>
+    <!-- * JSON-LD (для поисковиков): подтвердите image (домен), address, geo, telephone;
+         при желании добавьте openingHours -->
+    <script type="application/ld+json" nonce="abc123">
+    {
+      "@context": "https://schema.org",
+      "@type": "BeautySalon",
+      "name": "Beauty Studio",
+      "image": "https://вашдомен.ru/images/IMG_logo.jpeg",
+      "telephone": "+375291770822",
+      "priceRange": "$$",
+      "description": "Студия эстетической косметологии",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Привокзальная, д. 1, каб. 716",
+        "addressLocality": "Гомель",
+        "postalCode": "246000"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 52.431244, "longitude": 30.992874 }
+    }
+    </script>
+    <!-- script.js уже подключён в шапке документа с атрибутом defer -->
+</body>
+
+</html>

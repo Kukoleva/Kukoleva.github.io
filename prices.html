@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цены на услуги — Beauty Studio</title>
+    <meta name="description"
+        content="Полный прайс-лист косметологических услуг Beauty Studio: чистка лица, пилинги, массаж, уходовые процедуры.">
+    <!-- * При публикации можно указать полный адрес: https://ваш-домен/prices.html -->
+    <link rel="canonical" href="/prices.html" />
+    <link rel="icon" type="image/jpeg" href="images/IMG_logo.jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Karla:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стили под таблицу цен */
+        .prices-page {
+            padding: 40px 0;
+        }
+
+        .prices-page h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .prices-page .lead {
+            text-align: center;
+            margin-bottom: 32px;
+            color: #555;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+            box-shadow: var(--shadow);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+            border-bottom: 1px solid var(--border);
+            padding: 14px 16px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .pricing-table th {
+            background: var(--header-bg);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .price-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-dark);
+            white-space: nowrap;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: var(--accent-dark);
+            font-weight: 600;
+        }
+
+        /* ============================================================
+           АДАПТИВ — ТАБЛИЦА ЦЕН
+           На узких экранах обычная таблица не влезает по ширине и
+           заставляет страницу «ездить» влево-вправо. Поэтому ниже
+           640px превращаем её в стопку карточек: описание сверху,
+           цена и кнопка — в одну строку снизу.
+           ============================================================ */
+        @media (max-width: 640px) {
+            .pricing-table {
+                display: block;
+                width: 100%;
+                background: transparent;
+                box-shadow: none;
+                border-radius: 0;
+                margin-top: 12px;
+            }
+
+            .pricing-table thead {
+                /* В карточной раскладке шапка таблицы не нужна */
+                display: none;
+            }
+
+            .pricing-table tbody {
+                display: block;
+            }
+
+            .pricing-table tr {
+                display: grid;
+                grid-template-columns: 1fr auto;
+                align-items: center;
+                gap: 12px 16px;
+                padding: 16px;
+                margin-bottom: 14px;
+                background: #fff;
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                box-shadow: var(--shadow);
+            }
+
+            .pricing-table tr:last-child {
+                margin-bottom: 0;
+            }
+
+            .pricing-table td {
+                display: block;
+                min-width: 0;
+                padding: 0;
+                border: 0;
+                text-align: left;
+            }
+
+            /* Описание — на всю ширину карточки */
+            .pricing-table td:first-child {
+                grid-column: 1 / -1;
+                overflow-wrap: break-word;
+            }
+
+            /* Цена — слева */
+            .pricing-table td:nth-child(2) {
+                grid-column: 1;
+            }
+
+            /* Кнопка «Записаться» — справа */
+            .pricing-table td:last-child {
+                grid-column: 2;
+                text-align: right;
+            }
+
+            .price-value {
+                font-size: 1.15rem;
+            }
+
+            .pricing-table .btn {
+                padding: .7rem 1.1rem;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container prices-page">
+        <a class="back-link" href="index.html">← На главную</a>
+        <h1>Наши цены</h1>
+        <p class="lead">Выберите подходящую услугу и свяжитесь с нами для записи.</p>
+
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th>Описание</th>
+                    <th>Цена</th>
+                    <th>Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Консультация (онлайн / офлайн): определение типа кожи, оценка состояния кожи, разбор и подбор
+                        домашнего ухода.</td>
+                    <td><span class="price-value">40 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Чистка лица ультразвуковая: очищение, глубокое очищение, холодное гидрирование, УЗ-чистка,
+                        успокаивающая-восстанавливающая маска, тонизация, крем для век и лица.</td>
+                    <td><span class="price-value">80 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Чистка лица комбинированная: очищение, глубокое очищение, холодное гидрирование, УЗ-чистка,
+                        механическая чистка, восстанавливающая маска анти-акне, тонизация, крем для век и лица.</td>
+                    <td><span class="price-value">110 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Чистка лица УЗ + пилинг</td>
+                    <td><span class="price-value">100 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Чистка лица комбинированная + пилинг</td>
+                    <td><span class="price-value">130 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Массаж лица в авторской технике (лимфодренажный / скульптурный / релакс)+ уход.
+                        Продолжительность 1 час. Лицо, шея, декольте.</td>
+                    <td><span class="price-value">50 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Уходовая процедура на основе энзимного пилинга, бустеров и усилителей</td>
+                    <td><span class="price-value">90 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Карбокситерапия + альгинатная маска</td>
+                    <td><span class="price-value">110 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Биофитопилинг CHRISTINA + успокаивающая маска + уход</td>
+                    <td><span class="price-value">110 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Пилинг для жирной/проблемной кожи + очищающая маска + уход</td>
+                    <td><span class="price-value">100 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Пилинг омолаживающий Anti-age + маска «Мгновенный лифтинг» + уход</td>
+                    <td><span class="price-value">100 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Пилинг Джесснера (количество слоёв подбирается на консультации) + маска + уход</td>
+                    <td><span class="price-value">100 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Пилинг ретиноловый + успокаивающая/восстанавливающая маска + уход</td>
+                    <td><span class="price-value">100 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Пилинг Bio Renewal ARKANA (всесезонный) + маска + уход</td>
+                    <td><span class="price-value">100 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Микронидлинг (коктейль подбирается индивидуально) Лицо</td>
+                    <td><span class="price-value">100 р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Микронидлинг (коктейль подбирается индивидуально) Лицо + шея</td>
+                    <td><span class="price-value">120р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Микронидлинг (коктейль подбирается индивидуально) Лицо+шея+руки </td>
+                    <td><span class="price-value">180р </span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Коррекция/окрашивание бровей</td>
+                    <td><span class="price-value">35р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Процедура «Безупречная чистота»
+                        Состоит из: очищение, глубокое очищение, холодное гидрирование, чистка лица
+                        УЗ+ механическая+ биофитопилинг
+                        om Christina, маска очищающая/ успокаивающая восстанавливающая, тонизация, сыворотка для лица,
+                        крем для век, крем для лица</td>
+                    <td><span class="price-value">190р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Процедура «Идеальная кожа»
+                        Состоит из: очищение, глубокое очищение, массаж лица 45 минут лимфодренажный скульптурный,
+                        пилинг
+                        омолаживающий либо всесезонный Віо
+                        Renewal, тонизация, сыворотка для лица, крем для век, крем для лица</td>
+                    <td><span class="price-value">130р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+                <tr>
+                    <td>Процедура «Совершенное сияние»
+                        Состоит из: очищение, глубокое очищение, пилинг подбирается по типу кожи либо по запросу
+                        клиента, карбокситерапия,маска
+                        «Мгновенный лифтинг и увлажнение», тонизация, сыворотка для лица, крем для век, крем для лица
+                    </td>
+                    <td><span class="price-value">160р</span></td>
+                    <td><a href="index.html#contacts" class="btn btn--primary">Записаться →</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <p class="footer__title">Beauty Studio</p>
+            <nav class="socials">
+                <a href="https://t.me/kukoleva_cosmetology/" class="socials__link" target="_blank" rel="noopener">Telegram</a>
+                <a href="https://wa.me/375291770822" class="socials__link" target="_blank" rel="noopener">WhatsApp</a>
+                <a href="https://instagram.com/kukoleva_cosmetology/" class="socials__link" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a href="https://www.tiktok.com/@kukoleva_cosmetology?_r=1" class="socials__link" target="_blank" rel="noopener">tiktok</a>
+            </nav>
+            <p class="footer__copy">© 2026 Beauty Studio.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

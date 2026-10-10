@@ -1,0 +1,18 @@
+# Зависимости Node.js
+node_modules/
+
+# Служебное VS Code
+.vscode/
+
+# Системное
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Логи и кэш
+*.log
+npm-debug.log*
+
+# Секреты (если будут)
+.env
+.env.local
