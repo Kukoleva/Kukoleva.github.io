@@ -713,7 +713,7 @@ button {
         top: 0;
         left: 0;
         height: 37vh;
-        width: min(90%, 320px);
+        width: min(80%, 320px);
         background: var(--header-bg);
         flex-direction: column;
         justify-content: flex-start;
