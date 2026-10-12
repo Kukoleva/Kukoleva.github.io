@@ -10,8 +10,8 @@
     --gold: #411b40;
     --card: #ffffff;
     --border: #ecdfd9;
-    --shadow: 0 10px 30px -10px rgba(201, 123, 111, .35);
-    --shadow-btn: 0 6px 16px -6px rgba(65, 27, 66, .35);
+    --shadow: 0 10px 30px 10px rgba(201, 123, 111, .35);
+    --shadow-btn: 0 6px 16px 6px rgba(65, 27, 66, .35);
     --shadow-btn-hover: 0 12px 24px -8px rgba(65, 27, 66, .5);
     --radius: 16px;
     --header-h: 72px;
