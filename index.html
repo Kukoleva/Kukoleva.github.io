@@ -1,20 +1,5 @@
 <!DOCTYPE html>
 
-<!--
-   ============================================================
-   ЧТО НУЖНО ДОЗАПОЛНИТЬ САМОМУ — всё помечено звёздочкой  *
-   ============================================================
-   * 1. ДОМЕН — замените «вашдомен.ru» на свой (canonical, og:image,
-        og:url, dns-prefetch, а также в JSON-LD, sitemap.xml, schema.jsonld)
-   * 2. og:image — сделайте картинку-превью 1200x630 px и укажите её путь
-   * 3. ФАВИКОНКИ — при желании добавьте свои favicon.ico / apple-touch-icon.png
-   * 4. ТЕЛЕФОН и СОЦСЕТИ — проверьте актуальность номера и ссылок
-   * 5. JSON-LD (для поисковиков) — подтвердите address, geo, telephone, image
-   * 6. ГРАФИК работы — сейчас «По предварительной записи» (блок «Как нас найти»)
-   * 7. ФОТОГРАФИИ — по возможности сожмите: папка images весит около 27 МБ
-   ============================================================
--->
-
 <html lang="ru">
 
 <head>
@@ -46,9 +31,10 @@
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
     <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <link rel="manifest" href="images/site.webmanifest">
     <meta name="msapplication-TileColor" content="#411B42">
+    <meta name="theme-color" content="#411B42">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -56,14 +42,14 @@
     <meta property="og:description"
         content="Профессиональная косметология: чистка, пилинг, массаж, омоложение. Запись онлайн и по телефону.">
     <!-- * og:image — сделайте превью 1200x630 px и укажите путь к нему -->
-    <meta property="og:image" content="https://kukoleva.github.io/images/IMG_logo">
+    <meta property="og:image" content="https://kukoleva.github.io/images/IMG_logo.jpeg">
     <meta property="og:url" content="https://kukoleva.github.io/"> <!-- * замените домен -->
     <meta name="twitter:card" content="summary_large_image">
 
     <!-- Ресурсы -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="//kukoleva.github.io"> <!-- * замените домен -->
+    <link rel="dns-prefetch" href="//kukoleva.github.io/"> <!-- * замените домен -->
 
     <!-- Шрифты -->
     <link
@@ -81,13 +67,13 @@
         "@id": "https://kukoleva.github.io/#salon",
         "name": "Beauty Studio",
         "url": "https://kukoleva.github.io/",
-        "image": "https://kukoleva.github.io/images/IMG_log",
+        "image": "https://kukoleva.github.io/images/IMG_logo.jpeg",
         "telephone": "+375291770822",
         "priceRange": "$$",
         "description": "Студия эстетической косметологии в Гомеле",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "ул. Привокзальная, д. 1, каб. 716",
+            "streetAddress": "площадь Привокзальная, 1, гостиница «Гомель»,  этаж 7, каб. 716",
             "addressLocality": "Гомель",
             "postalCode": "246000",
             "addressCountry": "BY"
