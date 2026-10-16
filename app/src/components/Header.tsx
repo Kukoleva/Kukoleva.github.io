@@ -2,11 +2,11 @@ import { useState } from 'react'
 import { site } from '../site'
 
 const nav = [
-  { href: '#/', label: 'Главная' },
-  { href: '#services', label: 'Услуги' },
-  { href: '#/prices', label: 'Цены' },
+  { href: '#top', label: 'Главная' },
+  { href: '#services', label: 'Услуги и цены' },
   { href: '#works', label: 'Работы' },
-  { href: '#certs', label: 'Сертификаты' },
+  { href: '#reviews', label: 'Отзывы' },
+  { href: '#faq', label: 'Вопросы' },
   { href: '#contacts', label: 'Контакты' },
 ]
 

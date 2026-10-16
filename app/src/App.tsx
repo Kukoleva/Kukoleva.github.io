@@ -1,23 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { CallMenu } from './components/CallMenu'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Lightbox, type LightboxImage } from './components/Lightbox'
 import { Home } from './pages/Home'
-import { Prices } from './pages/Prices'
-
-function useHashRoute() {
-  const [hash, setHash] = useState(window.location.hash)
-  useEffect(() => {
-    const onChange = () => setHash(window.location.hash)
-    window.addEventListener('hashchange', onChange)
-    return () => window.removeEventListener('hashchange', onChange)
-  }, [])
-  return hash.startsWith('#/') ? hash : '#/'
-}
 
 export default function App() {
-  const route = useHashRoute()
   const [callOpen, setCallOpen] = useState(false)
   const [lightbox, setLightbox] = useState<{ images: LightboxImage[]; index: number } | null>(null)
 
@@ -29,13 +17,21 @@ export default function App() {
     <div className="flex min-h-screen flex-col">
       <Header onCall={onCall} />
       <div className="flex-1">
-        {route === '#/prices' ? (
-          <Prices onCall={onCall} />
-        ) : (
-          <Home onCall={onCall} onOpenLightbox={onOpenLightbox} />
-        )}
+        <Home onOpenLightbox={onOpenLightbox} />
       </div>
       <Footer />
+
+      {/* Плавающая кнопка записи — только мобильные */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white/95 p-3 backdrop-blur md:hidden">
+        <a
+          href="#booking"
+          className="block rounded-card bg-plum py-3 text-center font-semibold text-white shadow-btn"
+        >
+          📞 Записаться на приём
+        </a>
+      </div>
+      <div className="h-16 md:hidden" aria-hidden="true" />
+
       <CallMenu open={callOpen} onClose={() => setCallOpen(false)} />
       <Lightbox
         images={lightbox?.images ?? []}
