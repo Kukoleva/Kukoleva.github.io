@@ -16,3 +16,5 @@ npm-debug.log*
 # Секреты (если будут)
 .env
 .env.local
+# Сборка фронтенда
+app/dist/
