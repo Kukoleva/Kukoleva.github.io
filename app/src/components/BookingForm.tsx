@@ -35,8 +35,16 @@ export function BookingForm({ selected }: { selected: string | null }) {
   }
 
   return (
-    <section id="booking" className="bg-plum px-4 py-14 text-white">
-      <div className="mx-auto max-w-3xl">
+    <section id="booking" className="relative overflow-hidden bg-plum px-4 py-14 text-white">
+      <div
+        aria-hidden="true"
+        className="absolute -left-24 top-0 h-80 w-80 rounded-full bg-accent/25 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-[#7b4a8f]/35 blur-3xl"
+      />
+      <div className="relative mx-auto max-w-3xl">
         <h2 className="text-center font-serif text-3xl md:text-4xl">Записаться на приём</h2>
         <p className="mx-auto mt-3 max-w-lg text-center text-white/80">
           Заполните форму — заявка откроется в WhatsApp, останется нажать «отправить». Или напишите в
@@ -45,7 +53,7 @@ export function BookingForm({ selected }: { selected: string | null }) {
 
         <form
           onSubmit={submit}
-          className="mt-8 grid gap-4 rounded-card bg-white p-6 text-fg shadow-card sm:grid-cols-2"
+          className="mt-8 grid gap-4 rounded-card border border-white/60 bg-white/95 p-6 text-fg shadow-card backdrop-blur-xl sm:grid-cols-2"
         >
           <label className="flex flex-col gap-1.5">
             <span className="text-sm font-semibold">Ваше имя *</span>

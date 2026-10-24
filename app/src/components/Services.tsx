@@ -37,9 +37,9 @@ export function Services({ onBook }: { onBook: (service: string) => void }) {
         {list.map((s) => (
           <article
             key={s.title}
-            className="flex flex-col rounded-card border border-border bg-card p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-card"
+            className="group flex flex-col rounded-card border border-border bg-card p-5 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-card"
           >
-            <span className="w-fit rounded-full bg-accent/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-accent-dark">
+            <span className="w-fit rounded-full bg-accent-soft px-3 py-1 text-xs font-bold uppercase tracking-wide text-accent-dark">
               {s.category}
             </span>
             <h3 className="mt-3 font-serif text-xl leading-snug text-plum">{s.title}</h3>

@@ -36,14 +36,22 @@ export function Home({
   return (
     <main>
       {/* ГЕРОЙ */}
-      <section className="bg-gradient-to-b from-plum to-plum-dark px-4 pb-20 pt-14 text-white md:pt-20">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-10 md:flex-row md:justify-between">
+      <section className="relative overflow-hidden bg-gradient-to-b from-plum to-plum-dark px-4 pb-16 pt-14 text-white md:pt-20">
+        <div
+          aria-hidden="true"
+          className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-accent/30 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute -bottom-32 -left-24 h-96 w-96 rounded-full bg-[#7b4a8f]/40 blur-3xl"
+        />
+        <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-10 md:flex-row md:justify-between">
           <div className="max-w-xl text-center md:text-left">
-            <span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-sm font-semibold">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold backdrop-blur-md">
               ⭐ 5.0 · г. Гомель, гостиница «Гомель»
             </span>
-            <h1 className="mt-5 font-serif text-4xl leading-tight md:text-5xl">
-              {site.tagline}
+            <h1 className="mt-5 font-serif text-4xl leading-tight md:text-6xl">
+              Кабинет <em className="italic text-accent-soft">эстетической</em> косметологии в Гомеле
             </h1>
             <p className="mt-4 text-white/80">
               Чистка лица, пилинги, массаж, микронидлинг и комплексные программы — у
@@ -52,30 +60,76 @@ export function Home({
             <div className="mt-7 flex flex-wrap justify-center gap-3 md:justify-start">
               <a
                 href="#services"
-                className="rounded-card bg-accent px-8 py-3 font-semibold text-white shadow-btn transition hover:bg-accent-dark hover:shadow-btn-hover"
+                className="rounded-card bg-gradient-to-r from-accent to-accent-dark px-8 py-3 font-semibold text-white shadow-btn transition hover:-translate-y-0.5 hover:shadow-btn-hover"
               >
                 Выбрать услугу
               </a>
               <a
                 href="#booking"
-                className="rounded-card border border-white/40 px-8 py-3 font-semibold transition hover:bg-white/10"
+                className="rounded-card border border-white/40 px-8 py-3 font-semibold backdrop-blur-sm transition hover:bg-white/10"
               >
                 📞 Записаться
               </a>
             </div>
-            <p className="mt-5 text-sm text-white/60">
-              {site.addressOneLine} · {site.phoneDisplay}
-            </p>
+            <div className="mt-8 grid grid-cols-3 gap-4 border-t border-white/15 pt-5 text-center md:text-left">
+              <div>
+                <p className="font-serif text-2xl text-accent-soft md:text-3xl">5-й</p>
+                <p className="text-xs text-white/60">разряд косметолога</p>
+              </div>
+              <div>
+                <p className="font-serif text-2xl text-accent-soft md:text-3xl">21</p>
+                <p className="text-xs text-white/60">процедура в каталоге</p>
+              </div>
+              <div>
+                <p className="font-serif text-2xl text-accent-soft md:text-3xl">5.0</p>
+                <p className="text-xs text-white/60">оценка клиентов</p>
+              </div>
+            </div>
           </div>
           <Reveal>
-            <img
-              src={site.specialist.photo}
-              alt={`Косметолог ${site.specialist.name}`}
-              className="h-72 w-56 rounded-card object-cover shadow-card md:h-80 md:w-64"
-            />
+            <div className="relative">
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 translate-x-4 translate-y-4 rounded-t-[9rem] rounded-b-card border-2 border-accent/50"
+              />
+              <img
+                src={site.specialist.photo}
+                alt={`Косметолог ${site.specialist.name}`}
+                fetchPriority="high"
+                decoding="async"
+                className="relative h-80 w-56 rounded-t-[9rem] rounded-b-card object-cover shadow-card transition duration-500 hover:scale-[1.02] md:h-96 md:w-72"
+              />
+              <span className="animate-floaty absolute -left-6 bottom-8 rounded-card border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold backdrop-blur-md">
+                ✨ 7 этаж, каб. 716
+              </span>
+            </div>
           </Reveal>
         </div>
       </section>
+
+      {/* БЕГУЩАЯ СТРОКА */}
+      <div className="marquee overflow-hidden border-b border-border bg-card py-3.5" aria-hidden="true">
+        <div className="marquee-track items-center font-serif text-lg uppercase tracking-[0.2em] text-plum">
+          {[0, 1].map((copy) => (
+            <div key={copy} className="flex items-center">
+              {[
+                'Чистка лица',
+                'Пилинги',
+                'Массаж лица',
+                'Микронидлинг',
+                'Брови',
+                'Уходовые программы',
+                'Консультация',
+              ].map((t) => (
+                <span key={t} className="flex items-center">
+                  <span className="px-6">{t}</span>
+                  <span className="text-accent">✦</span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* ПРЕИМУЩЕСТВА */}
       <section className="mx-auto max-w-6xl px-4 py-12">
@@ -108,7 +162,14 @@ export function Home({
               onClick={() => onOpenLightbox(priceCards, i)}
               className="shrink-0 snap-center overflow-hidden rounded-card bg-card shadow-card transition hover:-translate-y-1"
             >
-              <img src={c.src} alt={c.alt} className="h-72 w-64 object-cover md:h-96 md:w-80" />
+              <img
+                src={c.src}
+                alt={c.alt}
+                loading="lazy"
+                decoding="async"
+                draggable={false}
+                className="h-72 w-64 object-cover md:h-96 md:w-80"
+              />
             </button>
           ))}
         </Carousel>
@@ -136,7 +197,14 @@ export function Home({
               onClick={() => onOpenLightbox(works, i)}
               className="shrink-0 snap-center overflow-hidden rounded-card bg-card shadow-card transition hover:-translate-y-1"
             >
-              <img src={w.src} alt={w.alt} loading="lazy" className="h-80 w-64 object-cover" />
+              <img
+                src={w.src}
+                alt={w.alt}
+                loading="lazy"
+                decoding="async"
+                draggable={false}
+                className="h-80 w-64 object-cover transition duration-500 hover:scale-105"
+              />
             </button>
           ))}
         </Carousel>
@@ -183,7 +251,14 @@ export function Home({
               onClick={() => onOpenLightbox(certs, i)}
               className="shrink-0 snap-center overflow-hidden rounded-card bg-card shadow-card transition hover:-translate-y-1"
             >
-              <img src={c.src} alt={c.alt} loading="lazy" className="h-80 w-64 object-cover" />
+              <img
+                src={c.src}
+                alt={c.alt}
+                loading="lazy"
+                decoding="async"
+                draggable={false}
+                className="h-80 w-64 object-cover transition duration-500 hover:scale-105"
+              />
             </button>
           ))}
         </Carousel>

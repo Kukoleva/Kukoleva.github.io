@@ -1,4 +1,5 @@
-const img = (name: string) => `${import.meta.env.BASE_URL}images/${name}`
+const img = (name: string) =>
+  `${import.meta.env.BASE_URL}images/${name.replace(/\.(jpe?g|JPG)$/i, '.webp')}`
 
 export const site = {
   brand: 'Beauty Studio',

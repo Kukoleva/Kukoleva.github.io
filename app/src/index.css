@@ -1,22 +1,23 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-bg: #faf1fe;
-  --color-fg: #2a1f1d;
-  --color-plum: #411b42;
-  --color-plum-dark: #30122f;
-  --color-accent: #c97b6f;
-  --color-accent-dark: #a85e54;
-  --color-card: #ffffff;
-  --color-border: #ecdfd9;
+  --color-bg: #f6f1ea;
+  --color-fg: #241d18;
+  --color-plum: #3c2140;
+  --color-plum-dark: #2a1530;
+  --color-accent: #c26547;
+  --color-accent-dark: #a34c31;
+  --color-accent-soft: #f3dccf;
+  --color-card: #fffdf8;
+  --color-border: #e7dcca;
 
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Karla', system-ui, sans-serif;
 
-  --shadow-card: 0 10px 30px 10px rgba(201, 123, 111, 0.35);
-  --shadow-btn: 0 6px 16px 6px rgba(65, 27, 66, 0.35);
-  --shadow-btn-hover: 0 12px 24px -8px rgba(65, 27, 66, 0.5);
-  --radius-card: 16px;
+  --shadow-card: 0 18px 45px -12px rgba(60, 33, 64, 0.28);
+  --shadow-btn: 0 10px 24px -8px rgba(194, 101, 71, 0.55);
+  --shadow-btn-hover: 0 16px 32px -8px rgba(194, 101, 71, 0.7);
+  --radius-card: 18px;
 }
 
 html {
@@ -30,6 +31,41 @@ body {
   color: var(--color-fg);
 }
 
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-accent) 45%, transparent);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Плёночное зерно поверх всего — живописная текстура */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 .no-scrollbar {
   scrollbar-width: none;
 }
@@ -37,12 +73,51 @@ body {
   display: none;
 }
 
+/* Бегущая строка */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Парящие элементы */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.animate-floaty {
+  animation: floaty 5s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-floaty {
+    animation: none;
+  }
+}
+
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
+  transform: translateY(24px);
   transition:
-    opacity 0.55s ease,
-    transform 0.55s ease;
+    opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .reveal.revealed {
   opacity: 1;

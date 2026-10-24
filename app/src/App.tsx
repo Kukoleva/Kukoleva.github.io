@@ -22,10 +22,10 @@ export default function App() {
       <Footer />
 
       {/* Плавающая кнопка записи — только мобильные */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white/95 p-3 backdrop-blur md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border/60 bg-bg/80 p-3 backdrop-blur-xl md:hidden">
         <a
           href="#booking"
-          className="block rounded-card bg-plum py-3 text-center font-semibold text-white shadow-btn"
+          className="block rounded-card bg-gradient-to-r from-accent to-accent-dark py-3 text-center font-semibold text-white shadow-btn"
         >
           📞 Записаться на приём
         </a>
