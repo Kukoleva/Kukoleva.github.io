@@ -40,7 +40,7 @@ export function Home({
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-10 md:flex-row md:justify-between">
           <div className="max-w-xl text-center md:text-left">
             <span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-sm font-semibold">
-              ⭐ 4.9 · г. Гомель, гостиница «Гомель»
+              ⭐ 5.0 · г. Гомель, гостиница «Гомель»
             </span>
             <h1 className="mt-5 font-serif text-4xl leading-tight md:text-5xl">
               {site.tagline}
@@ -143,7 +143,7 @@ export function Home({
       </section>
 
       {/* ОТЗЫВЫ */}
-      <Reviews />
+      <Reviews onOpenLightbox={onOpenLightbox} />
 
       {/* ФОРМА ЗАПИСИ */}
       <BookingForm selected={bookedService} />
