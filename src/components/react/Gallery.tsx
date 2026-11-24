@@ -22,7 +22,7 @@ export default function Gallery({ images, label = 'Галерея' }: Props) {
         type="button"
         onClick={() => scrollBy(-1)}
         aria-label="Прокрутить влево"
-        className="absolute left-2 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-plum text-2xl text-white shadow-btn transition hover:bg-accent-dark md:flex"
+        className="absolute left-2 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-btn text-2xl text-white shadow-btn transition hover:bg-btn-dark md:flex"
       >
         ‹
       </button>
@@ -51,7 +51,7 @@ export default function Gallery({ images, label = 'Галерея' }: Props) {
         type="button"
         onClick={() => scrollBy(1)}
         aria-label="Прокрутить вправо"
-        className="absolute right-2 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-plum text-2xl text-white shadow-btn transition hover:bg-accent-dark md:flex"
+        className="absolute right-2 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-btn text-2xl text-white shadow-btn transition hover:bg-btn-dark md:flex"
       >
         ›
       </button>

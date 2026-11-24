@@ -8,6 +8,8 @@
   --color-accent: #ff00ff;
   --color-accent-dark: #d600d6;
   --color-accent-soft: #ffe1fd;
+  --color-btn: #db70db;
+  --color-btn-dark: #b854b8;
   --color-card: #fffdf9;
   --color-border: #ecd8ee;
   --color-gold: #c9a15f;
@@ -16,8 +18,8 @@
   --font-sans: 'Karla', system-ui, sans-serif;
 
   --shadow-card: 0 18px 45px -12px rgba(43, 15, 51, 0.3);
-  --shadow-btn: 0 0 14px rgba(255, 0, 255, 0.55), 0 10px 26px -8px rgba(255, 0, 255, 0.5);
-  --shadow-btn-hover: 0 0 22px rgba(255, 0, 255, 0.9), 0 16px 36px -8px rgba(255, 0, 255, 0.7);
+  --shadow-btn: 0 0 14px rgba(219, 112, 219, 0.55), 0 10px 26px -8px rgba(219, 112, 219, 0.5);
+  --shadow-btn-hover: 0 0 22px rgba(219, 112, 219, 0.9), 0 16px 36px -8px rgba(219, 112, 219, 0.7);
   --radius-card: 18px;
 }
 
@@ -76,7 +78,7 @@ body {
   background: radial-gradient(
     circle,
     rgba(255, 255, 255, 0.95) 0%,
-    rgba(255, 0, 255, 0.55) 55%,
+    rgba(219, 112, 219, 0.55) 55%,
     transparent 72%
   );
   transform: scale(0);

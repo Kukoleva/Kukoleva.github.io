@@ -93,7 +93,7 @@ export default function BookingForm({ services, phone, phoneDisplay, whatsapp, t
           </label>
           <button
             type="submit"
-            className="rounded-card bg-plum py-3.5 font-semibold text-white shadow-btn transition hover:bg-accent-dark hover:shadow-btn-hover sm:col-span-2"
+            className="rounded-card bg-btn py-3.5 font-semibold text-white shadow-btn transition hover:bg-btn-dark hover:shadow-btn-hover sm:col-span-2"
           >
             Отправить заявку в WhatsApp →
           </button>
