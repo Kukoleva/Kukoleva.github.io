@@ -1,0 +1,329 @@
+---
+import { Image } from 'astro:assets'
+import { getCollection } from 'astro:content'
+import Layout from '../layouts/Layout.astro'
+import Faq from '../components/Faq.astro'
+import BookingForm from '../components/react/BookingForm.tsx'
+import Gallery from '../components/react/Gallery.tsx'
+import { site, advantages, faqSchema } from '../lib/site'
+import { reviews, faqs, priceCards, works, certs } from '../lib/data'
+import hero from '../assets/hero.webp'
+
+const categories = (await getCollection('categories')).sort((a, b) => a.data.order - b.data.order)
+const services = await getCollection('services')
+
+const bookingServices = services.map((s) => ({ title: s.data.title, price: s.data.price }))
+const countFor = (slug: string) => services.filter((s) => s.data.category === slug).length
+
+const title = 'Beauty Studio — эстетическая косметология в Гомеле'
+const description =
+  'Кабинет косметолога в Гомеле: чистка лица, пилинги, массаж, микронидлинг, комплексные программы. Гостиница «Гомель», 7 этаж, каб. 716. Запись: +375 (29) 177-08-22.'
+---
+
+<Layout title={title} description={description} path="/" jsonLd={[faqSchema(faqs)]}>
+  <!-- ГЕРОЙ -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-plum to-plum-dark px-4 pb-16 pt-14 text-white md:pt-20">
+    <div aria-hidden="true" class="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-accent/30 blur-3xl"></div>
+    <div aria-hidden="true" class="absolute -bottom-32 -left-24 h-96 w-96 rounded-full bg-[#b026ff]/40 blur-3xl"></div>
+
+    <div class="relative mx-auto flex max-w-5xl flex-col items-center gap-10 md:flex-row md:justify-between">
+      <div class="max-w-xl text-center md:text-left">
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold backdrop-blur-md">
+          ⭐ 5.0 · г. Гомель, гостиница «Гомель»
+        </span>
+        <h1 class="mt-5 font-serif text-4xl leading-tight md:text-6xl">
+          Кабинет <em class="italic text-accent-soft">эстетической</em> косметологии в Гомеле
+        </h1>
+        <p class="mt-4 text-white/80">
+          Чистка лица, пилинги, массаж, микронидлинг и комплексные программы — у косметолога-эстетиста
+          Анастасии Куколевой.
+        </p>
+        <div class="mt-7 flex flex-wrap justify-center gap-3 md:justify-start">
+          <a
+            href="/services/"
+            class="rounded-card bg-gradient-to-r from-accent to-accent-dark px-8 py-3 font-semibold text-white shadow-btn transition hover:-translate-y-0.5 hover:shadow-btn-hover"
+          >
+            Выбрать услугу
+          </a>
+          <a
+            href="/#booking"
+            class="rounded-card border border-white/40 px-8 py-3 font-semibold backdrop-blur-sm transition hover:bg-white/10"
+          >
+            📞 Записаться
+          </a>
+        </div>
+        <div class="mt-8 grid grid-cols-3 gap-4 border-t border-white/15 pt-5 text-center md:text-left">
+          <div>
+            <p class="font-serif text-2xl text-accent-soft md:text-3xl">5-й</p>
+            <p class="text-xs text-white/60">разряд косметолога</p>
+          </div>
+          <div>
+            <p class="font-serif text-2xl text-accent-soft md:text-3xl">21</p>
+            <p class="text-xs text-white/60">процедура в каталоге</p>
+          </div>
+          <div>
+            <p class="font-serif text-2xl text-accent-soft md:text-3xl">5.0</p>
+            <p class="text-xs text-white/60">оценка клиентов</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div
+          aria-hidden="true"
+          class="absolute inset-0 translate-x-4 translate-y-4 rounded-t-[9rem] rounded-b-card border-2 border-accent/50"
+        ></div>
+        <div class="relative aspect-[4/5] w-56 md:w-72">
+          <Image
+            src={hero}
+            alt={`Косметолог ${site.specialist.name} — Beauty Studio, Гомель`}
+            width={560}
+            height={700}
+            quality={80}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="absolute inset-0 h-full w-full rounded-t-[9rem] rounded-b-card object-cover shadow-card"
+          />
+        </div>
+        <span
+          class="animate-floaty absolute -left-6 bottom-8 rounded-card border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold backdrop-blur-md"
+        >
+          ✨ 7 этаж, каб. 716
+        </span>
+      </div>
+    </div>
+  </section>
+  <!-- БЕГУЩАЯ СТРОКА -->
+  <div class="marquee overflow-hidden border-b border-border bg-card py-3.5" aria-hidden="true">
+    <div class="marquee-track items-center font-serif text-lg uppercase tracking-[0.2em] text-plum">
+      {[0, 1].map((_) => (
+        <div class="flex items-center">
+          {['Чистка лица', 'Пилинги', 'Массаж лица', 'Микронидлинг', 'Брови', 'Уходовые программы', 'Консультация'].map(
+            (t) => (
+              <span class="flex items-center">
+                <span class="px-6">{t}</span>
+                <span class="text-accent">✦</span>
+              </span>
+            ),
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- ПРЕИМУЩЕСТВА -->
+  <section class="mx-auto max-w-6xl px-4 py-12">
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {advantages.map((a) => (
+        <div class="reveal h-full rounded-card border border-border bg-card p-5 shadow-sm">
+          <span class="text-2xl" aria-hidden="true">{a.icon}</span>
+          <h3 class="mt-2 font-semibold text-plum">{a.title}</h3>
+          <p class="mt-1 text-sm text-fg/70">{a.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- КАТАЛОГ КАТЕГОРИЙ -->
+  <section id="services" class="mx-auto max-w-6xl px-4 py-14">
+    <h2 class="text-center font-serif text-3xl text-plum md:text-4xl">Услуги и цены</h2>
+    <p class="mx-auto mt-3 max-w-xl text-center text-fg/70">
+      Выберите категорию — внутри полный перечень процедур с фиксированными ценами, без сюрпризов.
+    </p>
+
+    <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {categories.map((c) => (
+        <a
+          href={`/services/${c.id}/`}
+          class="group flex flex-col rounded-card border border-border bg-card p-6 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-card"
+        >
+          <span class="w-fit rounded-full bg-accent-soft px-3 py-1 text-xs font-bold uppercase tracking-wide text-accent-dark">
+            {countFor(c.id)} процедур
+          </span>
+          <span class="mt-3 text-3xl" aria-hidden="true">{c.data.icon}</span>
+          <h3 class="mt-2 font-serif text-2xl text-plum">{c.data.title}</h3>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-fg/70">{c.data.description}</p>
+          <span class="mt-4 font-semibold text-accent-dark transition group-hover:underline">Смотреть →</span>
+        </a>
+      ))}
+
+      <a
+        href="/services/"
+        class="flex flex-col justify-center rounded-card border-2 border-dashed border-border bg-card/50 p-6 text-center transition hover:border-accent hover:bg-card"
+      >
+        <span class="text-3xl" aria-hidden="true">🗂️</span>
+        <p class="mt-2 font-serif text-2xl text-plum">Все услуги</p>
+        <p class="mt-2 text-sm text-fg/70">Полный каталог из 21 процедуры с ценами</p>
+        <span class="mt-4 font-semibold text-accent-dark">Открыть каталог →</span>
+      </a>
+    </div>
+  </section>
+  <!-- ПРАЙС-ЛИСТ (фото) -->
+  <section class="mx-auto max-w-6xl px-4 py-10">
+    <h2 class="mb-8 text-center font-serif text-3xl text-plum md:text-4xl">Прайс-лист</h2>
+    <Gallery client:visible images={priceCards} label="Фото прайс-листа" />
+  </section>
+
+  <!-- ЦИТАТА -->
+  <div class="px-4 py-10 text-center">
+    <blockquote class="mx-auto max-w-xl font-serif text-2xl leading-snug text-plum md:text-3xl">
+      <p><strong>{site.quote.accent}</strong> {site.quote.line1}</p>
+      <p>{site.quote.line2}</p>
+      <p class="mt-3 text-lg text-accent-dark md:text-xl">{site.quote.tail}</p>
+    </blockquote>
+  </div>
+
+  <!-- РАБОТЫ -->
+  <section id="works" class="mx-auto max-w-6xl px-4 py-12">
+    <h2 class="mb-8 text-center font-serif text-3xl text-plum md:text-4xl">Наши работы</h2>
+    <Gallery client:visible images={works} label="Фото работ — результаты процедур" />
+  </section>
+
+  <!-- ОТЗЫВЫ -->
+  <section id="reviews" class="mx-auto max-w-6xl px-4 py-14">
+    <h2 class="text-center font-serif text-3xl text-plum md:text-4xl">Отзывы клиентов</h2>
+    <p class="mx-auto mt-3 max-w-xl text-center text-fg/70">
+      Средняя оценка {(reviews.reduce((sum, r) => sum + r.stars, 0) / reviews.length).toFixed(1)} из 5 —
+      реальные отзывы из мессенджеров.
+    </p>
+
+    <div class="no-scrollbar mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-1 pb-4">
+      {reviews.map((r) => (
+        <article
+          class="flex w-72 shrink-0 snap-center flex-col rounded-card border border-border bg-card p-5 shadow-sm md:w-80"
+        >
+          <span class="text-accent" aria-label={`Оценка ${r.stars} из 5`}>
+            {'★'.repeat(r.stars)}
+            <span class="text-border">{'★'.repeat(5 - r.stars)}</span>
+          </span>
+          <p class="mt-3 flex-1 text-sm leading-relaxed text-fg/80">«{r.text}»</p>
+          <div class="mt-4 flex items-end justify-between gap-3 border-t border-border pt-3">
+            <div>
+              <p class="font-semibold text-plum">{r.name}</p>
+              <p class="text-xs text-fg/60">{r.service}</p>
+            </div>
+            {r.shot && (
+              <a
+                href={r.shot}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Скриншот отзыва — ${r.name}`}
+                class="shrink-0 overflow-hidden rounded-lg border border-border transition hover:-translate-y-0.5 hover:shadow-card"
+              >
+                <img src={r.shot} alt={`Скриншот отзыва — ${r.name}`} loading="lazy" class="h-14 w-10 object-cover object-top" />
+              </a>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-8 text-center">
+      <a
+        href={site.socials.telegram}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rounded-card border-2 border-plum px-8 py-3 font-semibold text-plum transition hover:bg-plum hover:text-white"
+      >
+        Оставить отзыв в Telegram →
+      </a>
+    </div>
+  </section>
+
+  <!-- ФОРМА ЗАПИСИ -->
+  <BookingForm
+    client:load
+    services={bookingServices}
+    phone={site.phone}
+    phoneDisplay={site.phoneDisplay}
+    whatsapp={site.socials.whatsapp}
+    telegram={site.socials.telegram}
+  />
+
+  <!-- FAQ -->
+  <Faq items={faqs} />
+  <!-- О СПЕЦИАЛИСТЕ -->
+  <section id="about" class="mx-auto max-w-4xl px-4 py-10">
+    <article class="flex flex-col items-center gap-6 rounded-card bg-card p-8 shadow-card md:flex-row md:gap-10">
+      <div class="relative aspect-[4/5] w-44 shrink-0 md:w-52">
+        <Image
+          src={hero}
+          alt={`Косметолог ${site.specialist.name} — Beauty Studio, Гомель`}
+          width={416}
+          height={520}
+          quality={80}
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 h-full w-full rounded-card object-cover shadow-btn"
+        />
+      </div>
+      <div class="text-center md:text-left">
+        <h2 class="font-serif text-3xl text-plum">{site.specialist.name}</h2>
+        <p class="mt-2 font-semibold text-accent-dark">{site.specialist.rank}</p>
+        <p class="mt-1 text-fg/80">{site.specialist.extra}</p>
+        <p class="mt-4 text-sm text-fg/70">
+          Приём ведётся в кабинете 716 гостиницы «Гомель» — по предварительной записи.
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <!-- СЕРТИФИКАТЫ -->
+  <section id="certs" class="mx-auto max-w-6xl px-4 py-12">
+    <h2 class="mb-8 text-center font-serif text-3xl text-plum md:text-4xl">Дипломы и сертификаты</h2>
+    <Gallery client:visible images={certs} label="Дипломы и сертификаты косметолога" />
+  </section>
+
+  <!-- КОНТАКТЫ + КАРТА -->
+  <section id="contacts" class="mx-auto max-w-6xl px-4 py-12">
+    <h2 class="mb-8 text-center font-serif text-3xl text-plum md:text-4xl">Как нас найти</h2>
+    <div class="grid gap-5 md:grid-cols-3">
+      <div class="rounded-card bg-card p-6 text-center shadow-card">
+        <span class="text-3xl" aria-hidden="true">📍</span>
+        <h3 class="mt-2 font-serif text-xl text-plum">Адрес студии</h3>
+        <address class="mt-2 not-italic leading-relaxed">
+          {site.address.lines.map((l) => <span>{l}<br /></span>)}
+        </address>
+        <a
+          href={site.mapUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-3 inline-block font-semibold text-accent-dark underline-offset-4 hover:underline"
+        >
+          Открыть карту →
+        </a>
+      </div>
+      <div class="rounded-card bg-card p-6 text-center shadow-card">
+        <span class="text-3xl" aria-hidden="true">🕘</span>
+        <h3 class="mt-2 font-serif text-xl text-plum">Работаем</h3>
+        <p class="mt-2">{site.hours}</p>
+      </div>
+      <div class="rounded-card bg-card p-6 text-center shadow-card">
+        <span class="text-3xl" aria-hidden="true">📞</span>
+        <h3 class="mt-2 font-serif text-xl text-plum">Связаться</h3>
+        <p class="mt-2">
+          <a href={`tel:${site.phone}`} class="font-semibold text-accent-dark hover:underline">
+            {site.phoneDisplay}
+          </a>
+        </p>
+        <p class="mt-1 text-sm">
+          <a href={site.socials.whatsapp} target="_blank" rel="noopener noreferrer" class="text-accent-dark hover:underline">WhatsApp</a>
+          {' · '}
+          <a href={site.socials.telegram} target="_blank" rel="noopener noreferrer" class="text-accent-dark hover:underline">Telegram</a>
+          {' · '}
+          <a href={site.socials.instagram} target="_blank" rel="noopener noreferrer" class="text-accent-dark hover:underline">Instagram</a>
+        </p>
+      </div>
+    </div>
+    <div class="mt-6 overflow-hidden rounded-card border border-border shadow-card">
+      <iframe
+        title="Карта: гостиница «Гомель», пл. Привокзальная, 1"
+        src={site.mapEmbed}
+        class="h-72 w-full"
+        loading="lazy"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </section>
+</Layout>

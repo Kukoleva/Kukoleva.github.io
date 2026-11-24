@@ -1,0 +1,21 @@
+---
+interface Props {
+  href: string
+  title: string
+  price?: number
+  description?: string
+}
+const { href, title, price, description } = Astro.props
+---
+
+<a
+  href={href}
+  class="group flex flex-col rounded-card border border-border bg-card p-5 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-card"
+>
+  <h3 class="font-serif text-xl leading-snug text-plum">{title}</h3>
+  {description && <p class="mt-2 flex-1 text-sm leading-relaxed text-fg/70">{description}</p>}
+  <div class="mt-4 flex items-center justify-between border-t border-border pt-4">
+    {price !== undefined && <span class="text-xl font-bold text-accent-dark">{price} р</span>}
+    <span class="font-semibold text-accent-dark transition group-hover:underline">Подробнее →</span>
+  </div>
+</a>

@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import ServiceCard from '../../components/ServiceCard.astro'
+
+const categories = (await getCollection('categories')).sort((a, b) => a.data.order - b.data.order)
+const services = await getCollection('services')
+const listFor = (slug: string) => services.filter((s) => s.data.category === slug)
+
+const title = 'Услуги косметолога в Гомеле — цены | Beauty Studio'
+const description =
+  'Полный каталог: чистка лица, пилинги, массаж, микронидлинг и комплексные программы в Гомеле. Фиксированные цены от 35 BYN. Запись: +375 (29) 177-08-22.'
+---
+
+<Layout title={title} description={description} path="/services/">
+  <Breadcrumbs items={[{ label: 'Главная', href: '/' }, { label: 'Услуги' }]} />
+
+  <section class="mx-auto max-w-6xl px-4 py-10">
+    <h1 class="text-center font-serif text-3xl text-plum md:text-5xl">Услуги и цены</h1>
+    <p class="mx-auto mt-3 max-w-2xl text-center text-fg/70">
+      21 процедура в пяти категориях. Цены фиксированные — оплата на месте после процедуры, без сюрпризов.
+    </p>
+
+    {categories.map((c) => (
+      <div class="mt-12">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-border pb-3">
+          <h2 class="font-serif text-2xl text-plum md:text-3xl">
+            <a href={`/services/${c.id}/`} class="transition hover:text-accent-dark">
+              {c.data.icon} {c.data.title}
+            </a>
+          </h2>
+          <span class="text-sm font-semibold text-fg/50">{listFor(c.id).length} процедур</span>
+        </div>
+        <div class="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {listFor(c.id).map((s) => (
+            <ServiceCard
+              href={`/services/${s.id}/`}
+              title={s.data.title}
+              price={s.data.price}
+              description={s.data.shortDescription}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
+  </section>
+</Layout>

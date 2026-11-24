@@ -1,0 +1,57 @@
+# Decap CMS — управление ценами и текстами Beauty Studio
+# Админка: https://kukoleva.github.io/admin/
+# Документация: https://decapcms.org/docs/intro/
+
+backend:
+  name: github
+  repo: kukoleva/kukoleva.github.io # ← твой репозиторий на GitHub
+  branch: main # ← ветка (main или master)
+  # Для локального теста без OAuth запусти `npx decap-server` и поставь local_backend: true
+
+local_backend: false
+
+media_folder: 'public/images/media'
+public_folder: '/images/media'
+
+site_url: https://kukoleva.github.io
+display_url: https://kukoleva.github.io
+locale: ru
+
+collections:
+  - name: categories
+    label: 'Категории'
+    label_singular: 'Категория'
+    folder: src/content/categories
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Slug (латиницей)', name: slug, widget: string, hint: 'например: chistka-lica' }
+      - { label: 'Название', name: title, widget: string }
+      - { label: 'Иконка (emoji)', name: icon, widget: string, default: '✦' }
+      - { label: 'Порядок', name: order, widget: number, value_type: int, default: 10 }
+      - { label: 'SEO-описание', name: description, widget: text }
+      - { label: 'Текст страницы', name: body, widget: markdown, required: false }
+
+  - name: services
+    label: 'Услуги'
+    label_singular: 'Услуга'
+    folder: src/content/services
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Slug (латиницей)', name: slug, widget: string, hint: 'например: ultrazvukovaya-chistka-lica' }
+      - { label: 'Название', name: title, widget: string }
+      - label: 'Категория'
+        name: category
+        widget: select
+        options:
+          - { label: 'Чистки лица', value: 'chistka-lica' }
+          - { label: 'Пилинги и уход', value: 'pilingi' }
+          - { label: 'Массаж и микронидлинг', value: 'massazh-mikronidling' }
+          - { label: 'Комплексные программы', value: 'programmy' }
+          - { label: 'Брови и консультация', value: 'brovi-konsultaciya' }
+      - { label: 'Цена (BYN)', name: price, widget: number, value_type: int, default: 100 }
+      - { label: 'Длительность', name: duration, widget: string, required: false }
+      - { label: 'Короткое описание (карточки + SEO)', name: shortDescription, widget: text }
+      - { label: 'Описание (для schema.org)', name: description, widget: text }
+      - { label: 'Текст страницы', name: body, widget: markdown, required: false }

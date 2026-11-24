@@ -1,0 +1,143 @@
+---
+import '../styles/global.css'
+import { ClientRouter } from 'astro:transitions'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import { site, businessSchema } from '../lib/site'
+
+interface Props {
+  title: string
+  description: string
+  path: string
+  type?: string
+  image?: string
+  jsonLd?: Record<string, unknown>[]
+  noindex?: boolean
+}
+
+const {
+  title,
+  description,
+  path,
+  type = 'website',
+  image = site.defaultImage,
+  jsonLd = [],
+  noindex = false,
+} = Astro.props
+
+const canonical = new URL(path, site.url).href
+const ogImage = image.startsWith('http') ? image : site.url + image
+const schemas = [businessSchema, ...jsonLd].filter(Boolean)
+const bookWhatsapp =
+  site.socials.whatsapp + '?text=' + encodeURIComponent('Здравствуйте! Хочу записаться на процедуру.')
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    <meta name="theme-color" content="#ff00ff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="yandex-verification" content="de46c259f3f331fb" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content="Beauty Studio — Гомель" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" type="image/jpeg" href="/images/IMG_logo.jpeg" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Karla:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <ClientRouter />
+
+    {schemas.length > 0 && (
+      <script type="application/ld+json" set:html={JSON.stringify(schemas.length === 1 ? schemas[0] : schemas)} />
+    )}
+  </head>
+  <body class="flex min-h-screen flex-col bg-bg font-sans text-fg">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Плавающая кнопка записи — только мобильные -->
+    <div
+      class="fixed inset-x-0 bottom-0 z-40 border-t border-border/60 bg-bg/80 p-3 backdrop-blur-xl md:hidden"
+    >
+      <a
+        href={bookWhatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block rounded-card bg-gradient-to-r from-accent to-accent-dark py-3 text-center font-semibold text-white shadow-btn"
+      >
+        📞 Записаться на приём
+      </a>
+    </div>
+    <div class="h-16 md:hidden" aria-hidden="true"></div>
+
+    <script>
+      // Появление секций при скролле (IntersectionObserver) — повторно после каждой навигации
+      function initReveal() {
+        const els = document.querySelectorAll('.reveal:not(.revealed)')
+        if (!('IntersectionObserver' in window)) {
+          els.forEach((el) => el.classList.add('revealed'))
+          return
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('revealed')
+                io.unobserve(e.target)
+              }
+            })
+          },
+          { threshold: 0.12 },
+        )
+        els.forEach((el) => io.observe(el))
+      }
+      document.addEventListener('astro:page-load', initReveal)
+
+      // Neon ripple — эффект «волны» при клике по CTA-кнопкам
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement | null
+        if (!target) return
+        const host = target.closest('.shadow-btn, [data-ripple]') as HTMLElement | null
+        if (!host) return
+        const rect = host.getBoundingClientRect()
+        const size = Math.max(rect.width, rect.height, 40)
+        const ink = document.createElement('span')
+        ink.className = 'ripple-ink'
+        ink.style.width = ink.style.height = `${size}px`
+        ink.style.left = `${e.clientX - rect.left - size / 2}px`
+        ink.style.top = `${e.clientY - rect.top - size / 2}px`
+        host.appendChild(ink)
+        ink.addEventListener('animationend', () => ink.remove())
+      })
+    </script>
+  </body>
+</html>
